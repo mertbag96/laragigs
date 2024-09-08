@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ListingController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,6 +17,15 @@ use Illuminate\Support\Facades\Route;
 
 // Homepage
 Route::get('/', [ListingController::class, 'index'])->name('index');
+
+// Authentication
+Route::prefix('auth')->name('auth.')->group(function () {
+    Route::get('/signin', [AuthController::class, 'signin'])->name('signin');
+    Route::post('/login', [AuthController::class, 'login'])->name('login');
+    Route::get('/signup', [AuthController::class, 'signup'])->name('signup');
+    Route::post('/register', [AuthController::class, 'register'])->name('register');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+});
 
 // Listings
 Route::prefix('listings')->name('listings.')->group(function () {

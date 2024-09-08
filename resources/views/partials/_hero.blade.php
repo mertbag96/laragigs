@@ -11,8 +11,8 @@
             Find or post Laravel gigs
         </p>
         <div>
-            <a href="register.html"
-                class="inline-block border-2 border-white text-white py-2 px-4 rounded-xl uppercase mt-2 hover:text-black hover:border-black">
+            <a href="{{ route('auth.signup') }}"
+                class="inline-block bg-white rounded-xl py-2 px-4 mt-2 uppercase font-medium text-black hover:bg-black hover:text-white">
                 Sign Up to List a Gig
             </a>
         </div>

@@ -35,18 +35,42 @@
         </a>
 
         <ul class="flex space-x-6 mr-6 text-lg">
-            <li>
-                <a href="register.html" class="hover:text-laravel">
-                    <i class="fa-solid fa-user-plus"></i>
-                    Register
-                </a>
-            </li>
-            <li>
-                <a href="login.html" class="hover:text-laravel">
-                    <i class="fa-solid fa-arrow-right-to-bracket"></i>
-                    Login
-                </a>
-            </li>
+            @auth
+                <li>
+                    <span class="font-bold text-uppercase">
+                        Welcome, {{ auth()->user()->name }}
+                    </span>
+                </li>
+                <li>
+                    <a href="{{ route('listings.index') }}" class="font-medium hover:text-laravel">
+                        <i class="fa-solid fa-gear"></i>
+                        Manage Listings
+                    </a>
+                </li>
+                <li>
+                    <form method="POST" action="{{ route('auth.logout') }}" autocomplete="off">
+                        @csrf
+                        <button type="submit" class="font-medium hover:text-laravel">
+                            <i class="fa-solid fa-door-closed"></i>
+                            Sign Out
+                        </button>
+                    </form>
+                </li>
+            @else
+                <li>
+
+                    <a href="{{ route('auth.signup') }}" class="font-medium hover:text-laravel">
+                        <i class="fa-solid fa-user-plus"></i>
+                        Sign Up
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('auth.signin') }}" class="font-medium hover:text-laravel">
+                        <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                        Sign In
+                    </a>
+                </li>
+            @endauth
         </ul>
     </nav>
 
