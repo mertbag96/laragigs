@@ -6,11 +6,18 @@ use App\Http\Requests\Listing\ListingStoreRequest;
 use App\Http\Requests\Listing\ListingUpdateRequest;
 use App\Models\Listing;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class ListingController extends Controller
 {
+    /**
+     * Apply the 'auth' middleware to all methods except 'index' and 'show'.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index', 'show']);
+    }
+
     /**
      * Display a listing of the resource.
      */

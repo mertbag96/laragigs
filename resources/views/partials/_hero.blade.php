@@ -11,10 +11,17 @@
             Find or post Laravel gigs
         </p>
         <div>
-            <a href="{{ route('auth.signup') }}"
-                class="inline-block bg-white rounded-xl py-2 px-4 mt-2 uppercase font-medium text-black hover:bg-black hover:text-white">
-                Sign Up to List a Gig
-            </a>
+            @auth
+                <a href="{{ route('listings.create') }}"
+                    class="inline-block bg-white rounded-xl py-2 px-4 mt-2 uppercase font-medium text-black hover:bg-black hover:text-white">
+                    Post a Gig to find a developer
+                </a>
+            @else
+                <a href="{{ route('auth.signup') }}"
+                    class="inline-block bg-white rounded-xl py-2 px-4 mt-2 uppercase font-medium text-black hover:bg-black hover:text-white">
+                    Sign Up to List a Gig
+                </a>
+            @endauth
         </div>
     </div>
 </section>
