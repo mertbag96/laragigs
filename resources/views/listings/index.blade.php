@@ -19,3 +19,7 @@
     </div>
 
 </x-layout>
+
+<div class="mt-10 p-4">
+    {{ $listings->links() }}
+</div>

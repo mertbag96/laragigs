@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Listing\ListingStoreRequest;
+use App\Http\Requests\Listing\ListingUpdateRequest;
 use App\Models\Listing;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -14,24 +17,35 @@ class ListingController extends Controller
     public function index(): View
     {
         return view('listings.index', [
-            'listings' => Listing::latest()->filter(request(['tag', 'search']))->get()
+            'listings' => Listing::latest()
+            ->filter(request(['tag', 'search']))
+            ->simplePaginate(6)
         ]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
-        //
+        return view('listings.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ListingStoreRequest $request): RedirectResponse
     {
-        //
+        if ($request->hasFile('logo')) {
+            $logo = $request->file('logo')->store('logos', 'public');
+        }
+
+        Listing::create(array_merge(
+            $request->validated(),
+            ['logo' => $logo ?? null]
+        ));
+
+        return redirect()->route('index')->with('message', 'Gig was successfully created!');
     }
 
     /**
@@ -47,24 +61,37 @@ class ListingController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Listing $listing): View
     {
-        //
+        return view('listings.edit', [
+            'listing' => $listing
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ListingUpdateRequest $request, Listing $listing): RedirectResponse
     {
-        //
+        if ($request->hasFile('logo')) {
+            $logo = $request->file('logo')->store('logos', 'public');
+        }
+
+        $listing->update(array_merge(
+            $request->validated(),
+            ['logo' => $logo ?? null]
+        ));
+
+        return back()->with('message', 'Gig was successfully updated!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Listing $listing): RedirectResponse
     {
-        //
+        $listing->delete();
+
+        return redirect()->route('index')->with('message', 'Gig was successfully deleted!');
     }
 }
