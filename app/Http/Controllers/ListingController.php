@@ -31,6 +31,18 @@ class ListingController extends Controller
     }
 
     /**
+     * Display a listing of the resource depending on the autenticated user.
+     */
+    public function manage(): View
+    {
+        $listings = Listing::where('user_id', auth()->id())->get();
+
+        return view('listings.manage', [
+            'listings' => $listings
+        ]);
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create(): View
@@ -49,6 +61,7 @@ class ListingController extends Controller
 
         Listing::create(array_merge(
             $request->validated(),
+            ['user_id' => auth()->id() ?? null],
             ['logo' => $logo ?? null]
         ));
 
@@ -99,6 +112,6 @@ class ListingController extends Controller
     {
         $listing->delete();
 
-        return redirect()->route('index')->with('message', 'Gig was successfully deleted!');
+        return back()->with('message', 'Gig was successfully deleted!');
     }
 }

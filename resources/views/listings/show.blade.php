@@ -3,7 +3,7 @@
     <!-- Search -->
     @include('partials._search')
 
-    <a href="{{ route('index') }}" class="inline-block text-black ml-4 mb-4">
+    <a href="{{ url()->previous() }}" class="inline-block text-black ml-4 mb-4">
         <i class="fa-solid fa-arrow-left"></i>
         Back
     </a>
@@ -60,23 +60,6 @@
             </div>
         </x-card>
 
-        <x-card class="mt-4 p-2 flex space-x-6">
-            <a href="{{ route('listings.edit', $listing->id) }}">
-                <i class="fa-solid fa-pencil"></i>
-                Edit
-            </a>
-
-            <form method="POST" action="{{ route('listings.destroy', $listing->id) }}" autocomplete="off">
-                @csrf
-
-                @method('DELETE')
-
-                <button type="submit" class="text-laravel">
-                    <i class="fa-solid fa-trash"></i>
-                    Delete
-                </button>
-            </form>
-        </x-card>
     </div>
 
 </x-layout>

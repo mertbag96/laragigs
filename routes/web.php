@@ -30,6 +30,7 @@ Route::prefix('auth')->name('auth.')->group(function () {
 // Listings
 Route::prefix('listings')->name('listings.')->group(function () {
     Route::get('/', [ListingController::class, 'index'])->name('index');
+    Route::get('/manage', [ListingController::class, 'manage'])->name('manage');
     Route::get('/create', [ListingController::class, 'create'])->name('create');
     Route::get('/{listing}', [ListingController::class, 'show'])->name('show');
     Route::post('/store', [ListingController::class, 'store'])->name('store');

@@ -42,7 +42,7 @@
                     </span>
                 </li>
                 <li>
-                    <a href="{{ route('listings.index') }}" class="font-medium hover:text-laravel">
+                    <a href="{{ route('listings.manage') }}" class="font-medium hover:text-laravel">
                         <i class="fa-solid fa-gear"></i>
                         Manage Listings
                     </a>
