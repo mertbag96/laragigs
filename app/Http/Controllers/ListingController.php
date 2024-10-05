@@ -24,9 +24,9 @@ class ListingController extends Controller
     public function index(): View
     {
         return view('listings.index', [
-            'listings' => Listing::latest()
-            ->filter(request(['tag', 'search']))
-            ->simplePaginate(6)
+            'listings' => Listing::where('user_id', auth()->id())->latest()
+                ->filter(request(['tag', 'search']))
+                ->simplePaginate(6)
         ]);
     }
 
