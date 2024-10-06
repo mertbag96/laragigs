@@ -77,10 +77,10 @@ Make sure you have the following installed on your computer:
     DB_PASSWORD=your_password
     ```
 
-9. **Run database migrations**
+9. **Run database migrations and seed your database with fake data**
 
     ```sh
-    php artisan migrate
+    php artisan migrate --seed
     ```
 
 10. **Start the development server**
