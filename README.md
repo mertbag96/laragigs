@@ -9,7 +9,7 @@
 
 LaraGigs is a website where you can list or find your job listings.
 
-![alt text](https://github.com/mertbag96/laragigs/blob/main/public/assets/images/project-ss.JPG)
+![alt text](https://github.com/mertbag96/laragigs/blob/main/public/images/project-ss.JPG)
 
 ## Installation
 
